@@ -4,19 +4,18 @@ const {
   generateSlogan,
 } = require("../utils/slogan-generator");
 
-function getSlogan(request) {
-  generateSlogan(request).then(response => {
-    console.log(`Your request was: ${request}`);
-    console.log(`Your slogan is: ${response.slogan}`);
-  });
+async function getSlogan(request) {
+  const slogan = await generateSlogan(request);
+  console.log(`Your request was: ${request}`);
+  console.log(`Your slogan is: ${slogan}`);
 }
 
-function fullSession(request) {
-  generateMessage()
-    .then(console.log)
-    .then(() => getSlogan(request))
-    .then(() => goodbye())
-    .then(console.log);
+async function fullSession(request) {
+  const message = await generateMessage();
+  console.log(message);
+  await getSlogan(request);
+  const bye = await goodbye();
+  console.log(bye);
 }
 
 module.exports = { getSlogan, fullSession };
